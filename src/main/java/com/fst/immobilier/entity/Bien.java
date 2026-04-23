@@ -160,6 +160,15 @@ public class Bien {
 	public void setAgent(Agent agent) {
 		this.agent = agent;
 	}
+
+	
+
+	public Bien() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
     
+	
+	
     
 }

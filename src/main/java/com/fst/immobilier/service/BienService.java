@@ -46,4 +46,8 @@ public class BienService {
     public void delete(Long id) {
         repo.deleteById(id);
     }
+    
+    public List<Bien> searchByVille(String ville) {
+        return repo.findByVilleContaining(ville);
+    }
 }

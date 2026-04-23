@@ -3,7 +3,10 @@ package com.fst.immobilier.controller;
 
 import com.fst.immobilier.entity.Bien;
 import com.fst.immobilier.service.BienService;
+
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 
@@ -50,5 +53,23 @@ public class BienController {
     @GetMapping("/test")
     public String test() {
         return "OK";
+    }
+    
+    @GetMapping("/biens/edit/{id}")
+    public String editForm(@PathVariable Long id, Model model) {
+        model.addAttribute("bien", service.getById(id));
+        return "edit-bien";
+    }
+    
+    @PostMapping("/biens/update")
+    public RedirectView update(@ModelAttribute Bien bien) {
+        service.update(bien.getId(), bien);
+        return new RedirectView("/biens-view");
+    }
+    
+    @GetMapping("/biens/search")
+    public String search(@RequestParam String ville, Model model) {
+        model.addAttribute("biens", service.searchByVille(ville));
+        return "biens";
     }
 }
